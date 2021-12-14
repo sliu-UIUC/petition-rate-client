@@ -1,0 +1,37 @@
+.nav_bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 2px;
+    background-color: #330033a1;
+}
+
+.nav_left{
+    display: flex;
+    justify-content: flex-start;
+    margin: 2%;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.nav_title{
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.nav_profile{
+    padding-right: 2%;
+}
+
+.nav_create{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0;
+    padding-right: 4%;
+}
+
+.nav_btn{
+    color:#330033a1;
+}

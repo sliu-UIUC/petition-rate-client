@@ -1,0 +1,5 @@
+.two_cols{
+    display: flex;
+    orientation: horizontal;
+    justify-content: space-around;
+}

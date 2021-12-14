@@ -1,0 +1,15 @@
+.success_message{
+  color: green
+}
+
+.err_message{
+  color: red;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.normal_message{
+  color: rgb(111, 0, 255);
+  font-size: 1rem;
+  font-weight: 600;
+}
