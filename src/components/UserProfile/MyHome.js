@@ -26,6 +26,19 @@ const Home = () => {
 
   useEffect(() => {
     // console.log("http://localhost:5000/users/"+userid+"/votedPetitions");
+
+      fetch(
+        "https://petition-rate.herokuapp.com/users/" +
+          userid +
+          "/createdPetitions"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setCreated(data);
+        })
+        .catch((err) => console.log(err));
+      getUserName();
+
     fetch(
       "https://petition-rate.herokuapp.com/users/" + userid + "/votedPetitions"
     )
