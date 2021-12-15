@@ -27,14 +27,11 @@ const Form = ({ currentId, setCurrentId }) => {
 
   async function verifyAndSetUser() {
     try {
-      const res = await fetch(
-        "https://petition-rate.herokuapp.com/isUserAuth",
-        {
-          headers: {
-            "x-access-token": localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await fetch("https://petition-rate.herokuapp.com/isUserAuth", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
 
       const data = await res.json();
       setPetitionData({ ...petitionData, creator: data.username });
@@ -83,6 +80,7 @@ const Form = ({ currentId, setCurrentId }) => {
           {currentId ? `Editing "${petition.title}"` : "Create a Petition"}
         </Typography>
         <TextField
+          required
           name="title"
           variant="outlined"
           label="Title (Required)"
@@ -94,6 +92,7 @@ const Form = ({ currentId, setCurrentId }) => {
           }
         />
         <TextField
+          required
           name="message"
           variant="outlined"
           label="Description"

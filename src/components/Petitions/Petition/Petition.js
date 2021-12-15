@@ -21,18 +21,15 @@ const Petition = ({ petition, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [canDelete, setCanDelete] = React.useState(false);
-  const userid = localStorage.getItem('userid'); 
-  
+  const userid = localStorage.getItem('userid');
+
   async function allowToDelete(creator) {
     try {
-      const res = await fetch(
-        "https://petition-rate.herokuapp.com/isUserAuth",
-        {
-          headers: {
-            "x-access-token": localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await fetch("https://petition-rate.herokuapp.com/isUserAuth", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
 
       const data = await res.json();
 
@@ -70,7 +67,7 @@ const Petition = ({ petition, setCurrentId }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        
+
       </div>
       <Typography
         className={classes.title}
@@ -93,7 +90,7 @@ const Petition = ({ petition, setCurrentId }) => {
         >
           <ThumbUpAltIcon fontSize="small" /> Vote {petition.voteCount}{" "}
         </Button>
-        
+
         {canDelete ? (
           <Button
             size="small"
@@ -112,7 +109,7 @@ const Petition = ({ petition, setCurrentId }) => {
           </Button>
         </Link>
       </CardActions>
-      
+
     </Card>
   );
 };

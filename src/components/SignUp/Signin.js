@@ -17,21 +17,18 @@ const SignIn = () => {
   const [ErrMessage, SetErrMessage] = useState("")
   async function verifyAndLoggingIn() {
     try {
-      const res = await fetch(
-        "https://petition-rate.herokuapp.com/isUserAuth",
-        {
-          headers: {
-            "x-access-token": localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await fetch("https://petition-rate.herokuapp.com/isUserAuth", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
 
       const data = await res.json();
       if (data.isLoggedIn) {
         localStorage.setItem("userid", data.userid);
-        history.push("/");
+        history.push("/home");
       }else{
-        
+
       }
     } catch (err) {
       console.log("Error in verifying user");
@@ -112,7 +109,7 @@ const SignIn = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Username"
                 name="email"
                 autoComplete="email"
                 autoFocus

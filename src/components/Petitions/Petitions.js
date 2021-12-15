@@ -22,7 +22,7 @@ const Petitions = ({ setCurrentId, query, sortBy, setWidth }) => {
       <Grid item>
         <Grid container spacing={4}>
           {petitions.map((petition) =>
-            petition.title.startsWith(query) ? (
+            petition.title.toLowerCase().startsWith(query.toLowerCase()) ? (
               <Grid key={petition._id} item xs={setWidth}>
                 <Petition petition={petition} setCurrentId={setCurrentId} />
               </Grid>

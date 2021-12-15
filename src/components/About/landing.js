@@ -28,14 +28,14 @@ const useStyles = makeStyles(() => ({
     fontSize: "2rem",
   },
   colorText: {
-    color: "#5AFF3D",
+    color: "purple",
     fontSize: "1rem",
   },
   container: {
     textAlign: "center",
   },
   title: {
-    color: "#fff",
+    color: "black",
     fontSize: "4.5rem",
   },
 }));
@@ -53,9 +53,9 @@ export default function Landing() {
             <div className={classes.container}>
               <h1 className={classes.title}>
                 Welcome to <br />
-                Petition App
+                PetitionRate
                 <span className={classes.colorText}>
-                  &nbsp;&nbsp;Made by Toffee
+                  &nbsp;&nbsp;Made by TeamToffee
                 </span>
               </h1>
             </div>

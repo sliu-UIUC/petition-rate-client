@@ -18,8 +18,7 @@ const MyPetition = ({ petition }) => {
 
   const cardStyle = {
     display: "block",
-    width: "26vw",
-    height: "35vw",
+    width: "100%",
   };
   
   return (

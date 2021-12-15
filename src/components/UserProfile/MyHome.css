@@ -1,5 +1,19 @@
 .two_cols{
     display: flex;
-    orientation: horizontal;
+    flex-direction: horizontal;
     justify-content: space-around;
+    align-items:flex-start;
+
+}
+
+.col2{
+    width: 80%;
+    /* display: flex; */
+    /* flex-direction: vertical; */
+    /* align-items:center; */
+}
+
+.Petition{
+    padding: 10px;
+    width: 80%;
 }

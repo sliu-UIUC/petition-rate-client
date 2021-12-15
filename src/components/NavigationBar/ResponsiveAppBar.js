@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from 'react';
 import {
   AppBar,
   IconButton,
@@ -12,27 +12,26 @@ import {
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
 import "./ResponsiveAppBar.css";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
+  const userid = localStorage.getItem("userid");
+  const [userName, setUserName] = useState("");
   async function verifyAndLoggingIn() {
     try {
-      const res = await fetch(
-        "https://petition-rate.herokuapp.com/isUserAuth",
-        {
-          headers: {
-            "x-access-token": localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await fetch("https://petition-rate.herokuapp.com/isUserAuth", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
 
       const data = await res.json();
       setIsLoggedIn(data.isLoggedIn);
+      setUserName(data.username);
+
     } catch (err) {
       console.log("Error in verifying user");
     }
@@ -40,7 +39,7 @@ const ResponsiveAppBar = () => {
 
   const history = useHistory();
   const routeChangetoHome = () => {
-    history.push("/");
+    history.push("/home");
   };
 
   const routeChangeToCreate = () => {
@@ -56,7 +55,7 @@ const ResponsiveAppBar = () => {
   };
 
   const routeChangeToAbout = () => {
-    history.push("/about");
+    history.push("/");
   };
 
   const routeChangeToSignIn = () => {
@@ -96,6 +95,7 @@ const ResponsiveAppBar = () => {
             >
               About
             </Button>
+            {isLoggedIn ? (
             <Button
               variant="contained"
               color="primary"
@@ -103,7 +103,7 @@ const ResponsiveAppBar = () => {
               onClick={routeChangetoHome}
             >
               Home
-            </Button>
+            </Button>):null}
           </div>
 
           <div className="nav_profile">
@@ -122,6 +122,11 @@ const ResponsiveAppBar = () => {
                 <Avatar src="/broken-image.jpg" />
               </IconButton>
             </Tooltip>
+
+            {isLoggedIn ? (
+              <Typography variant="body1"
+              style={{ color: "white" }}>{userName}</Typography>
+            ):null}
           </div>
           <Menu
             sx={{ mt: "45px" }}
@@ -145,8 +150,8 @@ const ResponsiveAppBar = () => {
               </MenuItem>
             ): null}
             {isLoggedIn ? null : (
-              <MenuItem key="Log In" onClick={routeChangetoLogin}>
-                <Typography textAlign="center">Log In</Typography>
+              <MenuItem key="Sign In" onClick={routeChangetoLogin}>
+                <Typography textAlign="center">Sign In</Typography>
               </MenuItem>
             )}
             {isLoggedIn ? (
@@ -160,6 +165,8 @@ const ResponsiveAppBar = () => {
               </MenuItem>
             )}
           </Menu>
+
+
         </div>
       </AppBar>
     </div>

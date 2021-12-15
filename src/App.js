@@ -15,11 +15,11 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={AboutPage} />
           <Route exact path="/description/:id" component={DescriptionPage} />
           <Route exact path="/signin" component={SignInPage} />
           <Route exact path="/signup" component={SignUpPage} />
-          <Route exact path="/about" component={AboutPage} />
+          <Route exact path="/home" component={HomePage} />
             <Route exact path="/myhome"
             component={MyHome}/>
             <Route exact path="/add"

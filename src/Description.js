@@ -15,10 +15,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { blue } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import {Button} from "@material-ui/core/";
+import { useDispatch } from "react-redux";
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import { votePetition, deletePetition } from "./actions/petitions";
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 800,
+    width: '80%',
   },
   media: {
     height: 0,
@@ -42,17 +45,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Description = (props) => {
+  const dispatch = useDispatch();
   const { id } = props.match.params;
   const [createDate, setCreateDate] = useState(null);
   const [voteCount, setVoteCount] = useState(0);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [userName, setUserName] = useState("");
+  const [voteBy, setVoteBy] = useState("");
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
   const [pic, setPic] = useState("");
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const userid = localStorage.getItem('userid');
+  const handlevoteCount = () => {
+    dispatch(votePetition(id, userid));
+    if (!voteBy.includes(userid)) {
+      voteBy.push(userid);
+      setVoteCount(voteCount+1);
+    }else{
+      voteBy.splice(voteBy.indexOf(userid), 1);
+      setVoteCount(voteCount-1);
+    }
+
   };
 
   useEffect(() => {
@@ -64,6 +77,7 @@ const Description = (props) => {
         setUserName(result.data.creator);
         setVoteCount(result.data.voteCount);
         setPic(result.data.selectedFile);
+        setVoteBy(result.data.votedBy);
         const date = new Date(result.data.createdAt);
         setCreateDate(date.toString().split(" ").slice(1, 4).join(" "));
       });
@@ -86,7 +100,7 @@ const Description = (props) => {
           {description}
         </Typography>
       </CardContent>
-      <CardHeader 
+      <CardHeader
         avatar={
           <Avatar aria-label="profile_pic" className={classes.avatar}>
           </Avatar>
@@ -95,27 +109,19 @@ const Description = (props) => {
         titleTypographyProps={{variant:'h6' }}
         subheader={"Date created: " + createDate}
       />
-      <CardHeader 
+      <div className="Vote">
+      <CardHeader
         title= {"Vote Count: "+ voteCount}
         titleTypographyProps={{variant:'h6' }}
       />
-      <CardActions disableSpacing>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
+      <Button
+          size="small"
+          color="primary"
+          onClick={handlevoteCount}
         >
-        <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Typography>
-            Who Voted: TODO
-        </Typography>
-      </Collapse> */}
+          <ThumbUpAltIcon fontSize="large" /> Vote {voteCount}
+      </Button>
+      </div>
     </Card>
     </div>
   );

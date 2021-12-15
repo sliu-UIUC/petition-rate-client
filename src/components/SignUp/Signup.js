@@ -89,7 +89,7 @@ const SignUp = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Username"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -116,7 +116,7 @@ const SignUp = () => {
               {register ? (
                 <p className="success_message">You Are Registered Successfully</p>
               ) : ErrMessage ? (
-                <p className="err_message">Username or email has been taken!</p>
+                <p className="err_message">Username has been taken!</p>
               ) : <p className="normal_message">Please Register</p>
             }
             </Box>
