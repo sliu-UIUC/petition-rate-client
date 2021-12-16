@@ -52,12 +52,12 @@ const Home = () => {
           left: "25%",
         }}
         variant="outlined"
-        defaultValue="FilterBy"
+        defaultValue="SortBy"
         inputProps={{ "aria-label": "Without label" }}
         onChange={updateSortBy}
       >
-        <MenuItem value={"FilterBy"} disabled={true}>
-          <em>Filter By</em>
+        <MenuItem value={"SortBy"} disabled={true}>
+          <em>Sort By</em>
         </MenuItem>
         <MenuItem value={"voteCountDesc"}>Vote Count (Descending)</MenuItem>
         <MenuItem value={"voteCountAsc"}>Vote Count (Ascending)</MenuItem>
